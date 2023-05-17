@@ -19,9 +19,17 @@ const PokemonList = ({ pokemons }) => {
 };
 
 PokemonList.propTypes = {
-  pokemons: PropTypes.node.isRequired,
+  pokemons: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      sprites: PropTypes.shape({
+        front_default: PropTypes.string.isRequired,
+      }).isRequired,
+      types: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      id: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
 };
-
 PokemonList.defaultProps = {
   pokemons: Array(10).fill(""),
 };
