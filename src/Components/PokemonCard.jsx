@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import StartButton from "./StartButton";
-import { setFavorite } from "../actions";
+import { setFavorite } from "../slices/dataSlice";
 import "./PokemonList.css";
 
 
