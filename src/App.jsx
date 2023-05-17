@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Col, Spin } from "antd";
 import Searcher from "./Components/Searcher";
 import PokemonList from "./Components/PokemonList";
@@ -7,12 +7,15 @@ import { getPokemon } from "./Api";
 import { getPokemonsWithDetails, setLoading } from "./actions";
 import logo from "./Components/static/logo.svg";
 import "./App.css";
+import { isValueObject } from "immutable";
 
 function App() {
   // const [pokemons, setPokemons] = useState([]);
 
-  const pokemons = useSelector((state) => state.get("pokemons")).toJS();
-  const loading = useSelector((state) => state.get("loading"));
+  const pokemons = useSelector((state) =>
+    state.getIn(["data", "pokemons"], shallowEqual)
+  ).toJS();
+  const loading = useSelector((state) => state.getIn(["ui", "loading"]));
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,10 +39,16 @@ function App() {
       </Col>
       {loading ? (
         <Col offset={12}>
-          <Spin spinnign size="large" style={{ marginTop: 60 }} />
+          <Spin
+            spinnign={isValueObject.toString()}
+            size="large"
+            style={{ marginTop: 60 }}
+          />
         </Col>
       ) : (
-        <PokemonList pokemons={pokemons} />
+        <Col>
+          <PokemonList pokemons={pokemons} />
+        </Col>
       )}
     </>
   );

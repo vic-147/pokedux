@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import PokemonCard from "./PokemonCard";
-import "./PokemonList.css";
 
 const PokemonList = ({ pokemons }) => {
   return (
@@ -12,6 +11,7 @@ const PokemonList = ({ pokemons }) => {
           types={pokemon.types}
           id={pokemon.id}
           key={pokemon.id}
+          favorite={pokemon.favorite}
         />
       ))}
     </div>
@@ -25,8 +25,9 @@ PokemonList.propTypes = {
       sprites: PropTypes.shape({
         front_default: PropTypes.string.isRequired,
       }).isRequired,
-      types: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      types: PropTypes.node.isRequired,
       id: PropTypes.number.isRequired,
+      favorite: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
 };

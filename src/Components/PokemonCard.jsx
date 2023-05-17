@@ -4,6 +4,8 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import StartButton from "./StartButton";
 import { setFavorite } from "../actions";
+import "./PokemonList.css";
+
 
 const PokemonCard = ({ name, image, types, id, favorite }) => {
   const dispatch = useDispatch();
